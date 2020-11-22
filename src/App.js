@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect } from 'react';
+import SearchBar from './components/SearchBar';
+import Beers from './components/Beers';
+import { BeersContext } from './context/BeersContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const { urlQuery, getBeers } = useContext(BeersContext);
+
+	useEffect(
+		() => {
+			getBeers(urlQuery.page, urlQuery.search);
+		},
+		[ urlQuery ]
+	);
+
+	return (
+		<div className="container">
+			<SearchBar />
+			<Beers />
+		</div>
+	);
+};
 
 export default App;
