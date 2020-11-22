@@ -83,6 +83,10 @@ const AppRouter = () => {
 		
 	};
 
+	const deleteItem = (id) => {
+		setBeers(beers => beers.filter(beer => beer.id !== id));
+	}
+
 	const onFinishFailed = (errorInfo) => {
 		// console.log('Failed:', errorInfo);
 	};
@@ -108,7 +112,8 @@ const AppRouter = () => {
 				urlQuery,
 				setUrlQuery,
 				getBeers,
-				openUpdateModal
+				openUpdateModal,
+				deleteItem
 			}}
 		>
 			<Router>

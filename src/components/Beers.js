@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Spin, Space, Card, Row } from 'antd';
-import { EditOutlined, EllipsisOutlined, HeartOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, HeartOutlined } from '@ant-design/icons';
 import { BeersContext } from '../context/BeersContext';
 
 const { Meta } = Card;
 
 const Beers = () => {
-	const { beers, hasNext, setUrlQuery, favouriteBeers, setFavouriteBeers, openUpdateModal } = useContext(
+	const { beers, hasNext, setUrlQuery, favouriteBeers, setFavouriteBeers, openUpdateModal, deleteItem } = useContext(
 		BeersContext
 	);
 
@@ -79,7 +79,13 @@ const Beers = () => {
 											openUpdateModal(item.id, item.name, item.description);
 										}}
 									/>,
-									<EllipsisOutlined key="ellipsis" />
+									<DeleteOutlined
+										key="delete"
+										style={{ color: 'red' }}
+										onClick={() => {
+											deleteItem(item.id);
+										}}
+									/>
 								]}
 							>
 								<Meta title={item.name} description={item.description} />
